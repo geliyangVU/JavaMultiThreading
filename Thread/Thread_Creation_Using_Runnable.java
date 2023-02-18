@@ -17,3 +17,11 @@ public class Thread_Creation_Using_Runnable {
     }
 
 }
+
+// Interface(contains only one abstract method) with @FunctionalInterface can be
+// simplified using lamda expression
+//
+
+// Runnable runnable = () -> {
+// System.out.println("Inside runnable's run method");
+// };
