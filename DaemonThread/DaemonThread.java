@@ -1,3 +1,5 @@
+package DaemonThread;
+
 public class DaemonThread {
 
     public static void main(String[] args) throws InterruptedException {
