@@ -1,7 +1,5 @@
 package BiasedLock;
 
-import java.net.SocketImpl;
-
 public class BiasedLock {
     public static void main(String[] args) {
         Dog d = new Dog();
@@ -17,3 +15,10 @@ public class BiasedLock {
     }
 
 }
+
+// JVM command:
+// -XX:BiasedLockingStartupDelay=0 meaning: make biased lock take effect
+// immediately after object is created
+
+// -XX:-UseBiasedLocking meaning: stop using biased lock
+// -XX:+UseBiasedLocking meaning: use biased lock

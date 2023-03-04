@@ -22,13 +22,20 @@
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
 |                                  Mark Word (64 bits)                         |    Klass Word (64 bits)     |                    |
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
-| unused:25 | identity_hashcode:31 | unused:1 | age:4 | biased_lock:1 | lock:2 |    OOP to metadata object   |       Normal       |
+| unused:25 | identity_hashcode:31 | unused:1 | age:4 | biased_lock:0 | 01     |    OOP to metadata object   |       Normal       |
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
-| thread:54 |       epoch:2        | unused:1 | age:4 | biased_lock:1 | lock:2 |    OOP to metadata object   |       Biased       |
+| thread:54 |       epoch:2        | unused:1 | age:4 | biased_lock:1 | 01     |    OOP to metadata object   |       Biased       |
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
-|                       ptr_to_lock_record:62                         | lock:2 |    OOP to metadata object   | Lightweight Locked |
+|                       ptr_to_lock_record:62                         | 00     |    OOP to metadata object   | Lightweight Locked |
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
-|                     ptr_to_heavyweight_monitor:62                   | lock:2 |    OOP to metadata object   | Heavyweight Locked |
+|                     ptr_to_heavyweight_monitor:62                   | 10     |    OOP to metadata object   | Heavyweight Locked |
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
-|                                                                     | lock:2 |    OOP to metadata object   |    Marked for GC   |
+|                                                                     | 11     |    OOP to metadata object   |    Marked for GC   |
 |------------------------------------------------------------------------------|-----------------------------|--------------------
+
+
+biased_lock:0 , last two digit: 01--------->: Normal
+biased_lock:1 , last two digit: 01--------->: Biased
+
+ptr_to_lock_record:62 , last two digit: 00--------->: Lightweight Locked
+ptr_to_heavyweight_monitor:62 , last two digit: 10--------->: Heavyweight Locked
