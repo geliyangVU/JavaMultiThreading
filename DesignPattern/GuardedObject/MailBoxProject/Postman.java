@@ -12,7 +12,7 @@ public class Postman extends Thread {
 
     @Override
     public void run() {
-        GuardedObjectForMail guardedObjectForMail = MainBoxes.getGuardedObjectForMailById(mailid);
+        GuardedObjectForMail guardedObjectForMail = MailBoxes.getGuardedObjectForMailById(mailid);
         System.out.println("send mail with mailslot number:");
         System.out.println(guardedObjectForMail.getId());
 

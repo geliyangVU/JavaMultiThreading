@@ -2,7 +2,7 @@ package DesignPattern.GuardedObject.MailBoxProject;
 
 import java.util.*;
 
-public class MainBoxes {
+public class MailBoxes {
     // Hashtable is ThreadSafe collection
     private static Map<Integer, GuardedObjectForMail> mailBoxes = new Hashtable<>();
 

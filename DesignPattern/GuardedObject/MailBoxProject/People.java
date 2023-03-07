@@ -4,7 +4,7 @@ public class People extends Thread {
     @Override
     public void run() {
 
-        GuardedObjectForMail guardedObjectForMail = MainBoxes.createGuardedObjectForMail();
+        GuardedObjectForMail guardedObjectForMail = MailBoxes.createGuardedObjectForMail();
         System.out.println("People wants to get mail id:");
         System.out.println(guardedObjectForMail.getId());
 
