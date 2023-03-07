@@ -19,6 +19,10 @@ public class MainBoxes {
         return guardedObjectForMail;
     }
 
+    public static GuardedObjectForMail getGuardedObjectForMailById(int id) {
+        return mailBoxes.remove(id);// remove the mailbox, return the guardedObject.
+    }
+
     public static Set<Integer> getIds() {
         return mailBoxes.keySet();
     }
