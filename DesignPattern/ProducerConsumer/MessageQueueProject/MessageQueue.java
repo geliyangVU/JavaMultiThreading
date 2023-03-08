@@ -18,11 +18,15 @@ public class MessageQueue {
 
             while (messageQueue.isEmpty()) {
                 try {
+                    System.out.println("MQ is empty, waiting.");
                     messageQueue.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+
+            System.out.println("MQ is not empty, consume a message");
+
             Message message = messageQueue.removeFirst();
             messageQueue.notifyAll();
             return message;
@@ -34,11 +38,14 @@ public class MessageQueue {
 
             while (capacity == messageQueue.size()) {
                 try {
+                    System.out.println("MQ is full, waiting.");
+
                     messageQueue.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+            System.out.println("MQ is not full, produce a message");
 
             messageQueue.addLast(message);
             messageQueue.notifyAll();
