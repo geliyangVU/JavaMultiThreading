@@ -1,0 +1,57 @@
+public class JavaMultiThreadQuestion {
+
+    private static final int UPPERBOUND = 100;
+    private static volatile int currentNumber = 1;
+
+    public static void main(String[] args) throws InterruptedException {
+        printNumberOneToOneHundred();
+    }
+
+    public static void printNumberOneToOneHundred() throws InterruptedException {
+        final Object numberLock = new Object();
+
+        Thread thread1 = new Thread(() -> {
+            while (currentNumber <= UPPERBOUND) {
+                synchronized (numberLock) {
+                    if (currentNumber % 2 == 1) {
+                        System.out.println("Thread 1: " + currentNumber);
+                        currentNumber++;
+                        numberLock.notify();
+                    } else {
+                        try {
+                            numberLock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }, "thread1");
+
+        Thread thread2 = new Thread(() -> {
+            while (currentNumber <= UPPERBOUND) {
+                synchronized (numberLock) {
+                    if (currentNumber % 2 == 0) {
+                        System.out.println("Thread 2: " + currentNumber);
+                        currentNumber++;
+                        numberLock.notify();
+                    } else {
+                        try {
+                            numberLock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }, "thread2");
+
+        thread1.start();
+        thread2.start();
+
+        thread1.join();
+        thread2.join();
+        System.out.println("Finished");
+    }
+
+}
